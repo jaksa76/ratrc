@@ -1,0 +1,28 @@
+{
+  "name": "ratrc",
+  "displayName": "ratrc",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.77.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "ratrc",
+      "aliases": ["", "ratrc"],
+      "extensions": [""],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "ratrc",
+      "scopeName": "source.ratrc",
+      "path": "./syntaxes/ratrc.tmLanguage.json",
+      "embeddedLanguages": {
+        "meta.embedded.block.bash": "shellscript"
+      }
+    }]
+  }
+}

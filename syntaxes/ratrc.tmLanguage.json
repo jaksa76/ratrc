@@ -1,0 +1,53 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "ratrc",
+	"patterns": [{"include": "#mode"}, {"include": "#binding"}, {"include": "#comment"}],
+	"repository": {
+		"comment": {
+			"match": "#.*",
+			"name": "comment.line"
+		},
+		"variable": {
+			"patterns": [{
+				"name": "variable.language.ratrc",
+				"match": "\\$\\w+"
+			}]
+		},
+		"mode": {
+			"name": "meta.mode",
+			"begin": "(mode)\\s+([\\S]+)",
+			"end": "end",
+			"beginCaptures": {
+				"1": {"name": "keyword.control.mode"},
+				"2": {"name": "entity.name.type"}
+			},
+			"endCaptures": {
+				"0": { "name": "keyword.control.mode" }
+			},
+			"patterns": [{"include": "#annotation"}, {"include": "#keywords"}, {"include": "#binding"}]
+		},
+		"annotation": {
+			"name": "meta.annotation",
+			"match": "(annotate)\\s+(\\S+)\\s+(\\w+)\\s+(--)\\s*\\??!?>?(.+)",
+			"captures": {
+				"1": {"name": "keyword.control.annotation"},
+				"2": {"name": "storage.modifier.annotationType"},
+				"3": {"name": "entity.name.function"},
+				"4": {"name": "keyword.control"},
+				"5": {"name": "string", "patterns": [{"include": "#variable"}]}
+			}
+		},
+		"binding": {
+			"name": "meta.binding",
+			"match": "(bindkey)\\s+([-\\S]+)\\s+(\\w*)[^-]*(--)\\s*\\??!?>?(.+)",
+			"captures": {
+				"1": {"name": "keyword.control.binding"},
+				"2": {"name": "constant.character"},
+				"3": {"name": "entity.name.function"},
+				"4": {"name": "keyword.control"},
+				"5": {"name": "string", "patterns": [{"include": "#variable"}]}
+			}
+		}
+	},
+	"scopeName": "source.ratrc"
+}
